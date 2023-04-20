@@ -44,9 +44,9 @@ uint8 pit_state = 0;
 uint8 count_1 = 0;
 uint8 count_2 = 0;
 uint8 count_3 = 0;
-float pitch_out = 0;
-float roll_out = 0;
-float yaw_out = 0;
+float pitch_out = 0;        //pitch(滚转角)PWM输出
+float roll_out = 0;         //roll(俯仰角)PWM输出
+float yaw_out = 0;          //yaw(偏航角)PWM输出
 
 // 将本语句与#pragma section all restore语句之间的全局变量都放在CPU0的RAM中
 
