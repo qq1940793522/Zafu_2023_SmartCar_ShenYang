@@ -63,7 +63,6 @@ void core1_main(void)
 
     ips200_init(IPS200_TYPE_PARALLEL8);
     ips200_set_color(RGB565_WHITE, RGB565_BLACK);
-    wireless_uart_init();
 
     // 此处编写用户代码 例如外设初始化代码等
     cpu_wait_event_ready();                 // 等待所有核心初始化完毕
