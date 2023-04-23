@@ -105,13 +105,6 @@ void core1_main(void)
         ips200_show_string(15, 320-16*5, "Banl_Wheel_2_Encoder:");
         ips200_show_int(185, 320-16*5, banlance_wheel_2_now_encoder, 3);
 
-        ips200_show_string(15, 320-16*4, "Acc-X");
-        ips200_show_string(100, 320-16*4, "Acc-Y");
-        ips200_show_string(180, 320-16*4, "Acc-Z");
-        ips200_show_float(10, 320-16*3, icm_now_ax, 1, 4);
-        ips200_show_float(90, 320-16*3, icm_now_ay, 1, 4);
-        ips200_show_float(170, 320-16*3, icm_now_az, 1, 4);
-
         ips200_show_string(10, 320-16*2, "Gyro-X");
         ips200_show_string(95, 320-16*2, "Gyro-Y");
         ips200_show_string(175, 320-16*2, "Gyro-Z");
