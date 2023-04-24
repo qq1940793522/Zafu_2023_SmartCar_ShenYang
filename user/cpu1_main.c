@@ -70,54 +70,7 @@ void core1_main(void)
     {
         // 此处编写需要循环执行的代码
 
-        ips200_show_string(20, 320-16*12, "Pitch");
-        ips200_show_float(10, 320-16*11, pitch, 2, 4);
-        ips200_show_string(105, 320-16*12, "Roll");
-        ips200_show_float(100, 320-16*11, roll, 2, 4);
-        ips200_show_string(185, 320-16*12, "Yaw");
-        ips200_show_float(175, 320-16*11, yaw, 2, 4);
-
-        ips200_show_string(15, 320-16*10, "Mov_Wheel:");
-        ips200_show_float(130, 320-16*10, roll_gyro.Output, 5, 1);
-        if(moving_wheel_now_encoder > 0)
-            ips200_show_string(200, 320-16*10, "CW ");
-        else
-            ips200_show_string(200, 320-16*10, "CCW");
-
-        ips200_show_string(15, 320-16*9, "Banl_Wheel_1:");
-        ips200_show_float(130, 320-16*9, pitch_gyro.Output, 5, 1);
-        if(banlance_wheel_1_now_encoder > 0)
-            ips200_show_string(200, 320-16*9, "CW ");
-        else
-            ips200_show_string(200, 320-16*9, "CCW");
-
-        ips200_show_string(15, 320-16*8, "Banl_Wheel_2:");
-        ips200_show_float(130, 320-16*8, pitch_gyro.Output, 5, 1);
-        if(banlance_wheel_2_now_encoder > 0)
-            ips200_show_string(200, 320-16*8, "CW ");
-        else
-            ips200_show_string(200, 320-16*8, "CCW");
-
-        ips200_show_string(15, 320-16*7, "Moving_Wheel_Encoder:");
-        ips200_show_int(185, 320-16*7, moving_wheel_now_encoder, 3);
-        ips200_show_string(15, 320-16*6, "Banl_Wheel_1_Encoder:");
-        ips200_show_int(185, 320-16*6, banlance_wheel_1_now_encoder, 3);
-        ips200_show_string(15, 320-16*5, "Banl_Wheel_2_Encoder:");
-        ips200_show_int(185, 320-16*5, banlance_wheel_2_now_encoder, 3);
-
-        ips200_show_string(15, 320-16*4, "Acc-X");
-        ips200_show_string(100, 320-16*4, "Acc-Y");
-        ips200_show_string(180, 320-16*4, "Acc-Z");
-        ips200_show_float(10, 320-16*3, icm_now_ax, 1, 4);
-        ips200_show_float(90, 320-16*3, icm_now_ay, 1, 4);
-        ips200_show_float(170, 320-16*3, icm_now_az, 1, 4);        
         
-        ips200_show_string(10, 320-16*2, "Gyro-X");
-        ips200_show_string(95, 320-16*2, "Gyro-Y");
-        ips200_show_string(175, 320-16*2, "Gyro-Z");
-        ips200_show_float(10, 320-16*1, icm_now_gx, 1, 4);
-        ips200_show_float(90, 320-16*1, icm_now_gy, 1, 4);
-        ips200_show_float(170, 320-16*1, icm_now_gz, 1, 4);
 
         // 此处编写需要循环执行的代码
     }
