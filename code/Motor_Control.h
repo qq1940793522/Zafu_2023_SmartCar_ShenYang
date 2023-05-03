@@ -16,10 +16,10 @@
 #define     BANLANCE_WHEEL_PWM_FREQ             (20000)
 
 
-#define     MOVING_WHEEL_INH_1_PIN              (P20_2)
-#define     MOVING_WHEEL_INH_2_PIN              (P20_3)
-#define     MOVING_WHEEL_PWM_1_PIN              (ATOM0_CH5_P21_7)
-#define     MOVING_WHEEL_PWM_2_PIN              (ATOM0_CH6_P20_0)
+#define     MOVING_WHEEL_INH_1_PIN              (P21_2)
+#define     MOVING_WHEEL_INH_2_PIN              (P21_4)
+#define     MOVING_WHEEL_PWM_1_PIN              (ATOM0_CH1_P21_3)
+#define     MOVING_WHEEL_PWM_2_PIN              (ATOM0_CH3_P21_5)
 #define     MOVING_WHEEL_ENCODER_TIM            (TIM4_ENCODER)
 #define     MOVING_WHEEL_ENCODER_A_PIN          (TIM4_ENCODER_CH1_P02_8)
 #define     MOVING_WHEEL_ENCODER_B_PIN          (TIM4_ENCODER_CH2_P00_9)

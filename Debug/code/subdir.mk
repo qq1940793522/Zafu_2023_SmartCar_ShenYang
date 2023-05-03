@@ -4,21 +4,25 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
+../code/Car_Control.c \
 ../code/Mahony_Icm20602.c \
 ../code/Motor_Control.c \
 ../code/PID.c 
 
 OBJS += \
+./code/Car_Control.o \
 ./code/Mahony_Icm20602.o \
 ./code/Motor_Control.o \
 ./code/PID.o 
 
 COMPILED_SRCS += \
+./code/Car_Control.src \
 ./code/Mahony_Icm20602.src \
 ./code/Motor_Control.src \
 ./code/PID.src 
 
 C_DEPS += \
+./code/Car_Control.d \
 ./code/Mahony_Icm20602.d \
 ./code/Motor_Control.d \
 ./code/PID.d 

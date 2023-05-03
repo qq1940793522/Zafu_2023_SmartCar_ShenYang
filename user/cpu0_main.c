@@ -40,10 +40,6 @@
 #include "Mahony_Icm20602.h"
 #include "PID.h"
 
-uint8 pit_state = 0;        //中断标志位
-uint8 count_1 = 0;
-uint8 count_2 = 0;
-uint8 count_3 = 0;
 float pitch_out = 0;        //pitch(滚转角)PWM输出
 float roll_out = 0;         //roll(俯仰角)PWM输出
 float yaw_out = 0;          //yaw(偏航角)PWM输出
@@ -72,9 +68,9 @@ int core0_main(void)
 
     motor_init();
     mahony_init();
-    pit_ms_init(CCU60_CH0, 1);
-    pitch_pid_init();
-    roll_pid_init();
+    pit_ms_init(CCU60_CH0, 1);      //传感器更新中断 1ms
+    pit_ms_init(CCU60_CH1, 2);      //独轮车控制中断 2ms
+    pit_ms_init(CCU61_CH0, 100);    //菜单刷新中断 100ms
 
     // 此处编写用户代码 例如外设初始化代码等
     cpu_wait_event_ready();         // 等待所有核心初始化完毕
@@ -82,69 +78,7 @@ int core0_main(void)
     {
         // 此处编写需要循环执行的代码
 
-        if(pit_state)
-        {
-            icm_value_cala();
-            mahony_cala(icm_now_gz, icm_now_gy, -icm_now_gx, icm_now_az, icm_now_ay, -icm_now_ax);
-            pit_state = 0;
-            count_1++;
-            count_2++;
-            count_3++;
-            if(count_1 % 2 == 0)
-            {
-                count_1 = 0;
-                pid_cala(&pitch_gyro, pitch_angle.Output - icm_now_gy + pitch_gyro_revise);
-                pid_cala(&roll_gyro, roll_angle.Output - icm_now_gz + roll_gyro_revise);
-                //printf("%f,%f,%f\n",icm_now_gx, icm_now_gy, icm_now_gz);
-                //printf("%f,%f,%f,%f\n",pitch_gyro.Pout, pitch_gyro.Dout, pitch_gyro.Output, pitch_out);
-                //printf("%f,%f,%f,%f\n",roll_gyro.Pout, roll_gyro.Dout, roll_gyro.Output, roll_out);
-            }
-            if(count_2 % 5 == 0)
-            {
-                count_2 = 0;
-                pid_cala(&pitch_angle, pitch_velocity.Output - pitch + pitch_angle_revise);
-                pid_cala(&roll_angle, roll_velocity.Output - roll + roll_angle_revise);
-                //printf("%f,%f,%f\n",pitch, roll, yaw);
-                //printf("%f,%f,%f,%f\n", pitch_angle.Pout, pitch_angle.Dout, pitch_angle.Output, pitch_out);
-                //printf("%f,%f,%f,%f\n", roll_angle.Pout, roll_angle.Dout, roll_angle.Output, roll_out);
-            }
-            if(count_3 % 10 == 0)
-            {
-                count_3 = 0;
-                banlance_wheel_1_get_encoder();
-                banlance_wheel_2_get_encoder();
-                moving_wheel_get_encoder();
-                pid_cala(&pitch_velocity, 0 - (banlance_wheel_2_now_encoder - banlance_wheel_1_now_encoder)/2 + pitch_velocity_revise);
-                pid_cala(&roll_velocity, 0 + moving_wheel_now_encoder + roll_velocity_revise);
-                //printf("%f,%f,%f,%f\n", pitch_velocity.Output, pitch_angle.Output, pitch_gyro.Output, pitch_out);
-                //printf("%d,%d,%d\n",banlance_wheel_1_now_encoder, banlance_wheel_2_now_encoder, moving_wheel_now_encoder);
-                //printf("%f,%f,%f,%f\n", pitch_velocity.Pout, pitch_velocity.Dout, pitch_velocity.Output, pitch_out);
-                //printf("%f,%f,%f,%f\n", roll_velocity.Pout, roll_velocity.Dout, roll_velocity.Output, roll_out);
-            }
 
-            pitch_out = pitch_gyro.Output;
-            roll_out = roll_gyro.Output;
-            if(pitch_out >= 0)
-            {
-                banlance_wheel_1_dir = CCW;
-                banlance_wheel_2_dir = CW;
-            }
-            else if(pitch_out < 0)
-            {
-                banlance_wheel_1_dir = CW;
-                banlance_wheel_2_dir = CCW;
-            }
-            if(roll_out >= 0)
-                moving_wheel_dir = CW;
-            else if(roll_out < 0)
-                moving_wheel_dir = CCW;
-            banlance_wheel_1_pwm = limit(pitch_out, 7999, -7999);
-            banlance_wheel_2_pwm = limit(pitch_out, 7999, -7999);
-            moving_wheel_pwm = limit(roll_out, 7999, -7999);
-            banlance_wheel_1_control(banlance_wheel_1_dir, banlance_wheel_1_pwm);
-            banlance_wheel_2_control(banlance_wheel_2_dir, banlance_wheel_2_pwm);
-            moving_wheel_control(moving_wheel_dir, moving_wheel_pwm);
-        }
 
         // 此处编写需要循环执行的代码
     }
@@ -152,10 +86,29 @@ int core0_main(void)
 
 IFX_INTERRUPT(cc60_pit_ch0_isr, 0, CCU6_0_CH0_ISR_PRIORITY)
 {
-    interrupt_global_enable(0);                     // 开启中断嵌套
+    //interrupt_global_enable(0);                     // 关闭中断嵌套
     pit_clear_flag(CCU60_CH0);
+    //ICM20602更新数据和计算欧拉角
+    icm_value_cala();
+    mahony_cala(icm_now_gz, icm_now_gy, -icm_now_gx, icm_now_az, icm_now_ay, -icm_now_ax);
 
-    pit_state = 1;
+}
+
+IFX_INTERRUPT(cc60_pit_ch1_isr, 0, CCU6_0_CH1_ISR_PRIORITY)
+{
+    interrupt_global_enable(0);                     // 开启中断嵌套
+    pit_clear_flag(CCU60_CH1);
+    //车辆控制
+
+
+}
+
+IFX_INTERRUPT(cc61_pit_ch0_isr, 0, CCU6_1_CH0_ISR_PRIORITY)
+{
+    interrupt_global_enable(0);                     // 开启中断嵌套
+    pit_clear_flag(CCU61_CH0);
+    //菜单刷新
+
 
 }
 

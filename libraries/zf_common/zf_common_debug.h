@@ -38,10 +38,18 @@
 
 #include "zf_common_typedef.h"
 
+#define WIRELESS_ENABLE             (0)                 // 1为使用无线串口 0为默认串口
+#if WIRELESS_ENABLE
+#define DEBUG_UART_INDEX            (UART_2)            // 指定 debug uart 所使用的的串口
+#define DEBUG_UART_BAUDRATE         (115200)            // 指定 debug uart 所使用的的串口波特率
+#define DEBUG_UART_TX_PIN           (UART2_TX_P10_5)    // 指定 debug uart 所使用的的串口引脚
+#define DEBUG_UART_RX_PIN           (UART2_RX_P10_6)    // 指定 debug uart 所使用的的串口引脚
+#else
 #define DEBUG_UART_INDEX            (UART_0)            // 指定 debug uart 所使用的的串口
 #define DEBUG_UART_BAUDRATE         (115200)            // 指定 debug uart 所使用的的串口波特率
 #define DEBUG_UART_TX_PIN           (UART0_TX_P14_0)    // 指定 debug uart 所使用的的串口引脚
 #define DEBUG_UART_RX_PIN           (UART0_RX_P14_1)    // 指定 debug uart 所使用的的串口引脚
+#endif
 #define DEBUG_UART_USE_INTERRUPT    (0)                 // 是否启用 debug uart 接收中断
 
 
