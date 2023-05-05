@@ -8,6 +8,9 @@
 #ifndef CODE_PID_H_
 #define CODE_PID_H_
 
+#define PID_FLASH_SECTION_INDEX       (0)                                 // 存储PID数据用的扇区
+#define PID_FLASH_PAGE_INDEX          (0)                                 // 存储PID数据用的页码 第一个页码
+
 typedef struct
 {
     float Kp,Ki,Kd;//三个系数
@@ -40,5 +43,6 @@ void pid_init(PID *pid, float kp, float ki, float kd, float maxint, float maxout
 void pid_cala(PID *pid, float error);
 void pitch_pid_init(void);
 void roll_pid_init(void);
+void pid_flash_init(void);
 
 #endif /* CODE_PID_H_ */

@@ -40,10 +40,6 @@
 #include "Mahony_Icm20602.h"
 #include "PID.h"
 
-float pitch_out = 0;        //pitch(滚转角)PWM输出
-float roll_out = 0;         //roll(俯仰角)PWM输出
-float yaw_out = 0;          //yaw(偏航角)PWM输出
-
 // 将本语句与#pragma section all restore语句之间的全局变量都放在CPU0的RAM中
 
 // 工程导入到软件之后，应该选中工程然后点击refresh刷新一下之后再编译
@@ -66,8 +62,12 @@ int core0_main(void)
 
     // 此处编写用户代码 例如外设初始化代码等
 
-    motor_init();
-    mahony_init();
+    motor_init();                   //电机初始化
+    mahony_init();                  //Mahony初始化
+    pid_flash_init();               //PID参数写入flash
+    pitch_pid_init();               //pitch滚转角PID初始化
+    roll_pid_init();                //roll俯仰角PID初始化
+
     pit_ms_init(CCU60_CH0, 1);      //传感器更新中断 1ms
     pit_ms_init(CCU60_CH1, 2);      //独轮车控制中断 2ms
     pit_ms_init(CCU61_CH0, 100);    //菜单刷新中断 100ms

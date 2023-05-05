@@ -75,6 +75,7 @@ void pid_cala(PID *pid, float error)
  */
 void pitch_pid_init(void)
 {
+    // pitch滚转角PID初始化
     pid_init(&pitch_gyro, pitch_gyro_kp, pitch_gyro_ki, pitch_gyro_kd, 0, 9999);
     pid_init(&pitch_angle, pitch_angle_kp, pitch_angle_ki, pitch_angle_kd, 0, 9999);
     pid_init(&pitch_velocity, pitch_velocity_kp, pitch_velocity_ki, pitch_velocity_kd, 0, 9999);
@@ -86,7 +87,47 @@ void pitch_pid_init(void)
  */
 void roll_pid_init(void)
 {
+    // roll滚转角PID初始化
     pid_init(&roll_gyro, roll_gyro_kp, roll_gyro_ki, roll_gyro_kd, 0, 9999);
     pid_init(&roll_angle, roll_angle_kp, roll_angle_ki, roll_angle_kd, 0, 9999);
     pid_init(&roll_velocity, roll_velocity_kp, roll_velocity_ki, roll_velocity_kd, 0, 9999);
+}
+
+/*
+ * PID参数写入flash
+ * 返回值:无
+ */
+void pid_flash_init(void)
+{
+    if(flash_check(PID_FLASH_SECTION_INDEX, PID_FLASH_PAGE_INDEX))                      // 判断是否有数据
+        flash_erase_page(PID_FLASH_SECTION_INDEX, PID_FLASH_PAGE_INDEX);                // 擦除这一页
+    // 清空数据缓冲区
+    flash_buffer_clear();
+    // 向缓冲区第 0-23 个位置写入 PID 数据
+    flash_union_buffer[0].float_type  = pitch_gyro_kp;
+    flash_union_buffer[1].float_type  = pitch_gyro_ki;
+    flash_union_buffer[2].float_type  = pitch_gyro_kd;
+    flash_union_buffer[3].float_type  = pitch_angle_kp;
+    flash_union_buffer[4].float_type  = pitch_angle_ki;
+    flash_union_buffer[5].float_type  = pitch_angle_kd;
+    flash_union_buffer[6].float_type  = pitch_velocity_kp;
+    flash_union_buffer[7].float_type  = pitch_velocity_ki;
+    flash_union_buffer[8].float_type  = pitch_velocity_kd;
+    flash_union_buffer[9].float_type  = pitch_gyro_revise;
+    flash_union_buffer[10].float_type  = pitch_angle_revise;
+    flash_union_buffer[11].float_type  = pitch_velocity_revise;
+    flash_union_buffer[12].float_type  = roll_gyro_kp;
+    flash_union_buffer[13].float_type  = roll_gyro_ki;
+    flash_union_buffer[14].float_type  = roll_gyro_kd;
+    flash_union_buffer[15].float_type  = roll_angle_kp;
+    flash_union_buffer[16].float_type  = roll_angle_ki;
+    flash_union_buffer[17].float_type  = roll_angle_kd;
+    flash_union_buffer[18].float_type  = roll_velocity_kp;
+    flash_union_buffer[19].float_type  = roll_velocity_ki;
+    flash_union_buffer[20].float_type  = roll_velocity_kd;
+    flash_union_buffer[21].float_type  = roll_gyro_revise;
+    flash_union_buffer[22].float_type  = roll_angle_revise;
+    flash_union_buffer[23].float_type  = roll_velocity_revise;
+    // 向指定 Flash 扇区的页码写入缓冲区数据
+    flash_write_page_from_buffer(PID_FLASH_SECTION_INDEX, PID_FLASH_PAGE_INDEX);
 }
