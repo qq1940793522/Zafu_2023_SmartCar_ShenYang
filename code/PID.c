@@ -87,7 +87,7 @@ void pitch_pid_init(void)
  */
 void roll_pid_init(void)
 {
-    // roll滚转角PID初始化
+    // roll俯仰角PID初始化
     pid_init(&roll_gyro, roll_gyro_kp, roll_gyro_ki, roll_gyro_kd, 0, 9999);
     pid_init(&roll_angle, roll_angle_kp, roll_angle_ki, roll_angle_kd, 0, 9999);
     pid_init(&roll_velocity, roll_velocity_kp, roll_velocity_ki, roll_velocity_kd, 0, 9999);

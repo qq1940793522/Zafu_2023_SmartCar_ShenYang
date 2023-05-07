@@ -36,16 +36,11 @@
 #pragma section all "cpu0_dsram"
 
 #include "isr_config.h"
-#include "Motor_Control.h"
-#include "Mahony_Icm20602.h"
-#include "PID.h"
+#include "Car_Control.h"
 #include "Menu.h"
-
-float pitch_out = 0;        //pitch(滚转角)PWM输出
-float roll_out = 0;         //roll(俯仰角)PWM输出
-float yaw_out = 0;          //yaw(偏航角)PWM输出
-
-
+#include "Mahony_Icm20602.h"
+#include "Motor_Control.h"
+#include "PID.h"
 
 // 将本语句与#pragma section all restore语句之间的全局变量都放在CPU0的RAM中
 
@@ -70,25 +65,18 @@ int core0_main(void)
     // 此处编写用户代码 例如外设初始化代码等
 
     menu_init();
-
+    pid_flash_init();
     motor_init();
     mahony_init();
     pit_ms_init(CCU60_CH0, 1);      //传感器更新中断 1ms
     pit_ms_init(CCU60_CH1, 2);      //独轮车控制中断 2ms
-
 
     // 此处编写用户代码 例如外设初始化代码等
     cpu_wait_event_ready();         // 等待所有核心初始化完毕
     while (TRUE)
     {
         // 此处编写需要循环执行的代码
-        while(encoder_get_count(MENU_ENCODER_TIM) != 0)
-        {
-            ips200_clear();
-            menu_run();
-            encoder_clear_count(MENU_ENCODER_TIM);
 
-        }
 
 
         // 此处编写需要循环执行的代码
@@ -110,7 +98,7 @@ IFX_INTERRUPT(cc60_pit_ch1_isr, 0, CCU6_0_CH1_ISR_PRIORITY)
     interrupt_global_enable(0);                     // 开启中断嵌套
     pit_clear_flag(CCU60_CH1);
     //车辆控制
-
+    car_banlance();
 
 }
 
