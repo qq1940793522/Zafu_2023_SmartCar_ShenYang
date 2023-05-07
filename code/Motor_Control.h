@@ -11,8 +11,10 @@
 #define     CW                                  (1)
 #define     CCW                                 (0)
 
+
 #define     MOVING_WHEEL_PWM_FREQ               (17000)
 #define     BANLANCE_WHEEL_PWM_FREQ             (20000)
+
 
 #define     MOVING_WHEEL_INH_1_PIN              (P21_2)
 #define     MOVING_WHEEL_INH_2_PIN              (P21_4)
@@ -21,6 +23,7 @@
 #define     MOVING_WHEEL_ENCODER_TIM            (TIM4_ENCODER)
 #define     MOVING_WHEEL_ENCODER_A_PIN          (TIM4_ENCODER_CH1_P02_8)
 #define     MOVING_WHEEL_ENCODER_B_PIN          (TIM4_ENCODER_CH2_P00_9)
+
 
 #define     BANLANCE_WHEEL_1_DIR_PIN            (P02_4)
 #define     BANLANCE_WHEEL_1_PWM_PIN            (ATOM1_CH5_P02_5)
