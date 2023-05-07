@@ -8,6 +8,10 @@
 #ifndef CODE_CAR_CONTROL_H_
 #define CODE_CAR_CONTROL_H_
 
+<<<<<<< HEAD
+=======
+extern volatile uint8 count;
+>>>>>>> parent of 2c3c1d8 (Revert "2023/5/7-15:22")
 extern volatile float pitch_out;
 extern volatile float roll_out;
 extern volatile float yaw_out;

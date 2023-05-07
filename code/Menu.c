@@ -42,7 +42,7 @@ short selectItem;                       //当前在第几行
 
 void display_arrow_mark(uint16 y,const uint16 color)
 {
-    int32 i,j;
+    uint16 i,j;
     y = y - 10;
     for(j = 0 ;j > -5 ; j--)
     {
