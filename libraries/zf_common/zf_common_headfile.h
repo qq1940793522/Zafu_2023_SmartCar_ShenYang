@@ -102,7 +102,7 @@
 #include "zf_device_wifi_uart.h"
 #include "zf_device_wireless_uart.h"
 //===================================================外接设备驱动层===================================================
-
+#include "image.h"
 
 #endif
 

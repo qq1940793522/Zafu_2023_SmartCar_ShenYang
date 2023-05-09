@@ -54,23 +54,52 @@
 
 
 // **************************** 代码区域 ****************************
+
+
+#define IPS200_TYPE     (IPS200_TYPE_PARALLEL8)                                       // 双排排针 并口两寸屏 这里宏定义填写 IPS200_TYPE_PARALLEL8
+
 void core1_main(void)
 {
     disable_Watchdog();                     // 关闭看门狗
     interrupt_global_enable(0);             // 打开全局中断
-
+    clock_init();                   // 获取时钟频率<务必保留>
+    debug_init();                   // 初始化默认调试串口
     // 此处编写用户代码 例如外设初始化代码等
 
+<<<<<<< Updated upstream
 
+=======
+    ips200_init(IPS200_TYPE);
+
+    while(1)
+        {
+            if(mt9v03x_init())
+                ips200_show_string(0, 80, "mt9v03x reinit.");
+            else
+                break;
+            system_delay_ms(500);                                                   // 短延时快速闪灯表示异常
+        }
+>>>>>>> Stashed changes
 
     // 此处编写用户代码 例如外设初始化代码等
     cpu_wait_event_ready();                 // 等待所有核心初始化完毕
     while (TRUE)
     {
         // 此处编写需要循环执行的代码
+        // zzt
+        if(mt9v03x_finish_flag)
+        {
+//            Image_Get();            //获取抽样后的图像
+        ips200_displayimage03x((const uint8 *)mt9v03x_image, 188, 120);
+//            ips200_show_gray_image(0, 0, (const uint8 *)mt9v03x_image, MT9V03X_W, MT9V03X_H, 240, 180, 64);     // 显示二值化图像
+        mt9v03x_finish_flag = 0;
 
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 
+        }
         // 此处编写需要循环执行的代码
     }
 }
