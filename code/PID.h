@@ -31,12 +31,6 @@ extern PID roll_gyro;
 extern PID roll_angle;
 extern PID roll_velocity;
 
-// 平衡PID
-extern PID banlance;
-
-// 旋转PID
-extern PID rotate;
-
 // pitch滚转角PID参数
 extern volatile float pitch_gyro_kp, pitch_gyro_ki, pitch_gyro_kd;
 extern volatile float pitch_angle_kp, pitch_angle_ki, pitch_angle_kd;
@@ -49,11 +43,11 @@ extern volatile float roll_angle_kp, roll_angle_ki, roll_angle_kd;
 extern volatile float roll_velocity_kp, roll_velocity_ki, roll_velocity_kd;
 extern volatile float roll_gyro_revise, roll_angle_revise, roll_velocity_revise;
 
-float limit(float input, float max, float min);extern                                   //
-void pid_init(PID *pid, float kp, float ki, float kd, float maxint, float maxout);      //
-void pid_cala(PID *pid, float error);                                                   //
-void pitch_pid_init(void);                                                              //
-void roll_pid_init(void);                                                               //
-void pid_flash_init(void);                                                              //
+float limit(float input, float max, float min);extern
+void pid_init(PID *pid, float kp, float ki, float kd, float maxint, float maxout);
+void pid_cala(PID *pid, float error);
+void pitch_pid_init(void);
+void roll_pid_init(void);
+void pid_flash_init(void);
 
 #endif /* CODE_PID_H_ */

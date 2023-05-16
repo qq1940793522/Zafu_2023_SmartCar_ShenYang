@@ -51,5 +51,6 @@ void banlance_wheel_2_control(uint8 dir, uint16 pwm);
 void moving_wheel_get_encoder(void);
 void banlance_wheel_1_get_encoder(void);
 void banlance_wheel_2_get_encoder(void);
+void motor_stop(void);
 
 #endif /* CODE_MOTOR_CONTROL_H_ */

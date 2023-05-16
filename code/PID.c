@@ -16,17 +16,17 @@ PID roll_gyro;
 PID roll_angle;
 PID roll_velocity;
 
-//Pitch参数     使用并级PID    只用KP     5300    0.2     0.14
-volatile float pitch_gyro_kp = 5300, pitch_gyro_ki = 0, pitch_gyro_kd = 0;
-volatile float pitch_angle_kp = 0.2, pitch_angle_ki = 0, pitch_angle_kd = 0;
-volatile float pitch_velocity_kp = 0.13, pitch_velocity_ki = 0, pitch_velocity_kd = 0;
-volatile float pitch_gyro_revise = 0, pitch_angle_revise = -2.0, pitch_velocity_revise = 0;
+//Pitch滚转角参数     使用并级PID
+volatile float pitch_gyro_kp = 5250.0,          pitch_gyro_ki = 0,              pitch_gyro_kd = 10;
+volatile float pitch_angle_kp = 0.2,            pitch_angle_ki = 0,             pitch_angle_kd = 1;
+volatile float pitch_velocity_kp = 0.135,       pitch_velocity_ki = 0,          pitch_velocity_kd = 0;
+volatile float pitch_gyro_revise = 0,           pitch_angle_revise = -2.0,      pitch_velocity_revise = 0;
 
-//Roll参数      使用并级PID    只用KP     1       2500    0.0025
-volatile float roll_gyro_kp = 1, roll_gyro_ki = 0, roll_gyro_kd = 0;
-volatile float roll_angle_kp = 2500, roll_angle_ki = 0, roll_angle_kd = 0;
-volatile float roll_velocity_kp = 0.0025, roll_velocity_ki = 0, roll_velocity_kd = 0;
-volatile float roll_gyro_revise = 0, roll_angle_revise = 0.2, roll_velocity_revise = 0;
+//Roll俯仰角参数      使用并级PID
+volatile float roll_gyro_kp = 10.0,             roll_gyro_ki = 0,               roll_gyro_kd = 1;
+volatile float roll_angle_kp = 200.0,           roll_angle_ki = 0,              roll_angle_kd = 10;
+volatile float roll_velocity_kp = 0.008,        roll_velocity_ki = 0,           roll_velocity_kd = 0;
+volatile float roll_gyro_revise = 0,            roll_angle_revise = 0.0,        roll_velocity_revise = 0;
 
 /*
  * 限幅函数

@@ -116,3 +116,10 @@ void banlance_wheel_2_get_encoder(void)
     encoder_clear_count(BANLANCE_WHEEL_2_ENCODER_TIM);
 }
 
+void motor_stop(void)
+{
+    pwm_set_duty(MOVING_WHEEL_PWM_1_PIN, 0);
+    pwm_set_duty(MOVING_WHEEL_PWM_2_PIN, 0);
+    pwm_set_duty(BANLANCE_WHEEL_1_PWM_PIN, 10000);
+    pwm_set_duty(BANLANCE_WHEEL_2_PWM_PIN, 10000);
+}
