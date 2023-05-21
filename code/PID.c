@@ -16,17 +16,27 @@ PID roll_gyro;
 PID roll_angle;
 PID roll_velocity;
 
-//Pitch滚转角参数     使用并级PID
+PID yaw_gyro;
+PID yaw_angle;
+PID yaw_velocity;
+
+// Pitch滚转角参数       使用串级PID
 volatile float pitch_gyro_kp = 5250.0,          pitch_gyro_ki = 0,              pitch_gyro_kd = 10;
 volatile float pitch_angle_kp = 0.2,            pitch_angle_ki = 0,             pitch_angle_kd = 1;
-volatile float pitch_velocity_kp = 0.135,       pitch_velocity_ki = 0,          pitch_velocity_kd = 0;
-volatile float pitch_gyro_revise = 0,           pitch_angle_revise = -2.0,      pitch_velocity_revise = 0;
+volatile float pitch_velocity_kp = 0.14,        pitch_velocity_ki = 0,          pitch_velocity_kd = 0;
+volatile float pitch_gyro_revise = 0,           pitch_angle_revise = -2.0,      pitch_velocity_revise = -2;
 
-//Roll俯仰角参数      使用并级PID
+// Roll俯仰角参数        使用串级PID
 volatile float roll_gyro_kp = 10.0,             roll_gyro_ki = 0,               roll_gyro_kd = 1;
-volatile float roll_angle_kp = 200.0,           roll_angle_ki = 0,              roll_angle_kd = 10;
-volatile float roll_velocity_kp = 0.008,        roll_velocity_ki = 0,           roll_velocity_kd = 0;
+volatile float roll_angle_kp = 190.0,           roll_angle_ki = 0,              roll_angle_kd = 10;
+volatile float roll_velocity_kp = 0.007,        roll_velocity_ki = 0,           roll_velocity_kd = 0;
 volatile float roll_gyro_revise = 0,            roll_angle_revise = 0.0,        roll_velocity_revise = 0;
+
+// yaw偏航角参数         使用串级PID
+volatile float yaw_gyro_kp = 2000.0,               yaw_gyro_ki = 0,                yaw_gyro_kd = 0;
+volatile float yaw_angle_kp = 0.0,              yaw_angle_ki = 0,               yaw_angle_kd = 0;
+volatile float yaw_velocity_kp = 0.0,           yaw_velocity_ki = 0,            yaw_velocity_kd = 0;
+volatile float yaw_gyro_revise = 0,             yaw_angle_revise = 0.0,         yaw_velocity_revise = 0;
 
 /*
  * 限幅函数
@@ -94,40 +104,13 @@ void roll_pid_init(void)
 }
 
 /*
- * PID参数写入flash
+ * yaw偏航角PID初始化
  * 返回值:无
  */
-void pid_flash_init(void)
+void yaw_pid_init(void)
 {
-    if(flash_check(PID_FLASH_SECTION_INDEX, PID_FLASH_PAGE_INDEX))                      // 判断是否有数据
-        flash_erase_page(PID_FLASH_SECTION_INDEX, PID_FLASH_PAGE_INDEX);                // 擦除这一页
-    // 清空数据缓冲区
-    flash_buffer_clear();
-    // 向缓冲区第 0-23 个位置写入 PID 数据
-    flash_union_buffer[0].float_type  = pitch_gyro_kp;
-    flash_union_buffer[1].float_type  = pitch_gyro_ki;
-    flash_union_buffer[2].float_type  = pitch_gyro_kd;
-    flash_union_buffer[3].float_type  = pitch_angle_kp;
-    flash_union_buffer[4].float_type  = pitch_angle_ki;
-    flash_union_buffer[5].float_type  = pitch_angle_kd;
-    flash_union_buffer[6].float_type  = pitch_velocity_kp;
-    flash_union_buffer[7].float_type  = pitch_velocity_ki;
-    flash_union_buffer[8].float_type  = pitch_velocity_kd;
-    flash_union_buffer[9].float_type  = pitch_gyro_revise;
-    flash_union_buffer[10].float_type  = pitch_angle_revise;
-    flash_union_buffer[11].float_type  = pitch_velocity_revise;
-    flash_union_buffer[12].float_type  = roll_gyro_kp;
-    flash_union_buffer[13].float_type  = roll_gyro_ki;
-    flash_union_buffer[14].float_type  = roll_gyro_kd;
-    flash_union_buffer[15].float_type  = roll_angle_kp;
-    flash_union_buffer[16].float_type  = roll_angle_ki;
-    flash_union_buffer[17].float_type  = roll_angle_kd;
-    flash_union_buffer[18].float_type  = roll_velocity_kp;
-    flash_union_buffer[19].float_type  = roll_velocity_ki;
-    flash_union_buffer[20].float_type  = roll_velocity_kd;
-    flash_union_buffer[21].float_type  = roll_gyro_revise;
-    flash_union_buffer[22].float_type  = roll_angle_revise;
-    flash_union_buffer[23].float_type  = roll_velocity_revise;
-    // 向指定 Flash 扇区的页码写入缓冲区数据
-    flash_write_page_from_buffer(PID_FLASH_SECTION_INDEX, PID_FLASH_PAGE_INDEX);
+    // yaw偏航角PID初始化
+    pid_init(&yaw_gyro, yaw_gyro_kp, yaw_gyro_ki, yaw_gyro_kd, 0, 9999);
+    pid_init(&yaw_angle, yaw_angle_kp, yaw_angle_ki, yaw_angle_kd, 0, 9999);
+    pid_init(&yaw_velocity, yaw_velocity_kp, yaw_velocity_ki, yaw_velocity_kd, 0, 9999);
 }
