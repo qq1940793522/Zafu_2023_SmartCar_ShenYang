@@ -16,6 +16,6 @@ extern volatile float car_speed;
 
 uint8 car_check(void);
 void car_banlance(void);
-void car_control(int16 speed, int16 rotate);
+void car_control(int16 speed, float rotate);
 
 #endif /* CODE_CAR_CONTROL_H_ */
