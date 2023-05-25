@@ -9,6 +9,7 @@ C_SRCS += \
 ../code/Menu.c \
 ../code/Motor_Control.c \
 ../code/PID.c \
+../code/SystemInit.c \
 ../code/image.c 
 
 OBJS += \
@@ -17,6 +18,7 @@ OBJS += \
 ./code/Menu.o \
 ./code/Motor_Control.o \
 ./code/PID.o \
+./code/SystemInit.o \
 ./code/image.o 
 
 COMPILED_SRCS += \
@@ -25,6 +27,7 @@ COMPILED_SRCS += \
 ./code/Menu.src \
 ./code/Motor_Control.src \
 ./code/PID.src \
+./code/SystemInit.src \
 ./code/image.src 
 
 C_DEPS += \
@@ -33,6 +36,7 @@ C_DEPS += \
 ./code/Menu.d \
 ./code/Motor_Control.d \
 ./code/PID.d \
+./code/SystemInit.d \
 ./code/image.d 
 
 

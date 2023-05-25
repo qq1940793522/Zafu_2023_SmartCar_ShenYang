@@ -33,6 +33,8 @@ extern uint8 image_new_gray_bin[ROW_H][COL_W];  //188*120抽取成94*60
 extern uint8 image_new_bin[ROW_H][COL_W];   //二值化图像数组
 extern int otsu (unsigned char *image,  int rows, int cols);
 extern unsigned char Half_Road_Width57,Old_HRWid;
+extern float   Mid_Out;    //输出的权值中线
+
 
 /* 动态调整 元素补线参数 */
 extern uint8 Add_Carport;

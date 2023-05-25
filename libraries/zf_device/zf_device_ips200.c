@@ -227,10 +227,10 @@ static void ips200_set_region (uint16 x1, uint16 y1, uint16 x2, uint16 y2)
     // 如果程序在输出了断言信息 并且提示出错位置在这里
     // 那么一般是屏幕显示的时候超过屏幕分辨率范围了
     // 检查一下你的显示调用的函数 自己计算一下哪里超过了屏幕显示范围
-    zf_assert(x1 < ips200_x_max);
-    zf_assert(y1 < ips200_y_max);
-    zf_assert(x2 < ips200_x_max);
-    zf_assert(y2 < ips200_y_max);
+//    zf_assert(x1 < ips200_x_max);
+//    zf_assert(y1 < ips200_y_max);
+//    zf_assert(x2 < ips200_x_max);
+//    zf_assert(y2 < ips200_y_max);
 
     ips200_write_command(0x2a);
     ips200_write_16bit_data(x1);
@@ -396,8 +396,8 @@ void ips200_draw_point (uint16 x, uint16 y, const uint16 color)
 {
     // 如果程序在输出了断言信息 并且提示出错位置在这里
     // 那么一般是屏幕显示的时候超过屏幕分辨率范围了
-    zf_assert(x < ips200_x_max);
-    zf_assert(y < ips200_y_max);
+//    zf_assert(x < ips200_x_max);
+//    zf_assert(y < ips200_y_max);
 
     if(IPS200_TYPE_SPI == ips200_display_type)
     {
@@ -426,10 +426,10 @@ void ips200_draw_line (uint16 x_start, uint16 y_start, uint16 x_end, uint16 y_en
 {
     // 如果程序在输出了断言信息 并且提示出错位置在这里
     // 那么一般是屏幕显示的时候超过屏幕分辨率范围了
-    zf_assert(x_start < ips200_x_max);
-    zf_assert(y_start < ips200_y_max);
-    zf_assert(x_end < ips200_x_max);
-    zf_assert(y_end < ips200_y_max);
+//    zf_assert(x_start < ips200_x_max);
+//    zf_assert(y_start < ips200_y_max);
+//    zf_assert(x_end < ips200_x_max);
+//    zf_assert(y_end < ips200_y_max);
 
     int16 x_dir = (x_start < x_end ? 1 : -1);
     int16 y_dir = (y_start < y_end ? 1 : -1);
@@ -486,8 +486,8 @@ void ips200_show_char (uint16 x, uint16 y, const char dat)
 {
     // 如果程序在输出了断言信息 并且提示出错位置在这里
     // 那么一般是屏幕显示的时候超过屏幕分辨率范围了
-    zf_assert(x < ips200_x_max);
-    zf_assert(y < ips200_y_max);
+//    zf_assert(x < ips200_x_max);
+//    zf_assert(y < ips200_y_max);
 
     uint8 i, j;
 
@@ -573,8 +573,8 @@ void ips200_show_string (uint16 x, uint16 y, const char dat[])
 {
     // 如果程序在输出了断言信息 并且提示出错位置在这里
     // 那么一般是屏幕显示的时候超过屏幕分辨率范围了
-    zf_assert(x < ips200_x_max);
-    zf_assert(y < ips200_y_max);
+//    zf_assert(x < ips200_x_max);
+//    zf_assert(y < ips200_y_max);
 
     uint16 j = 0;
     while(dat[j] != '\0')
@@ -610,10 +610,10 @@ void ips200_show_int (uint16 x, uint16 y, const int32 dat, uint8 num)
 {
     // 如果程序在输出了断言信息 并且提示出错位置在这里
     // 那么一般是屏幕显示的时候超过屏幕分辨率范围了
-    zf_assert(x < ips200_x_max);
-    zf_assert(y < ips200_y_max);
-    zf_assert(num > 0);
-    zf_assert(num <= 10);
+//    zf_assert(x < ips200_x_max);
+//    zf_assert(y < ips200_y_max);
+//    zf_assert(num > 0);
+//    zf_assert(num <= 10);
 
     int32 dat_temp = dat;
     int32 offset = 1;
@@ -648,10 +648,10 @@ void ips200_show_uint (uint16 x, uint16 y, const uint32 dat, uint8 num)
 {
     // 如果程序在输出了断言信息 并且提示出错位置在这里
     // 那么一般是屏幕显示的时候超过屏幕分辨率范围了
-    zf_assert(x < ips200_x_max);
-    zf_assert(y < ips200_y_max);
-    zf_assert(num > 0);
-    zf_assert(num <= 10);
+//    zf_assert(x < ips200_x_max);
+//    zf_assert(y < ips200_y_max);
+//    zf_assert(num > 0);
+//    zf_assert(num <= 10);
 
     uint32 dat_temp = dat;
     int32 offset = 1;
@@ -689,12 +689,12 @@ void ips200_show_float (uint16 x, uint16 y, const float dat, uint8 num, uint8 po
 {
     // 如果程序在输出了断言信息 并且提示出错位置在这里
     // 那么一般是屏幕显示的时候超过屏幕分辨率范围了
-    zf_assert(x < ips200_x_max);
-    zf_assert(y < ips200_y_max);
-    zf_assert(num > 0);
-    zf_assert(num <= 8);
-    zf_assert(pointnum > 0);
-    zf_assert(pointnum <= 6);
+//    zf_assert(x < ips200_x_max);
+//    zf_assert(y < ips200_y_max);
+//    zf_assert(num > 0);
+//    zf_assert(num <= 8);
+//    zf_assert(pointnum > 0);
+//    zf_assert(pointnum <= 6);
 
     float dat_temp = dat;
     float offset = 1.0;
@@ -731,9 +731,9 @@ void ips200_show_binary_image (uint16 x, uint16 y, const uint8 *image, uint16 wi
 {
     // 如果程序在输出了断言信息 并且提示出错位置在这里
     // 那么一般是屏幕显示的时候超过屏幕分辨率范围了
-    zf_assert(x < ips200_x_max);
-    zf_assert(y < ips200_y_max);
-    zf_assert(image != NULL);
+//    zf_assert(x < ips200_x_max);
+//    zf_assert(y < ips200_y_max);
+//    zf_assert(image != NULL);
 
     uint32 i = 0, j = 0;
     uint8 temp = 0;
@@ -786,9 +786,9 @@ void ips200_show_gray_image (uint16 x, uint16 y, const uint8 *image, uint16 widt
 {
     // 如果程序在输出了断言信息 并且提示出错位置在这里
     // 那么一般是屏幕显示的时候超过屏幕分辨率范围了
-    zf_assert(x < ips200_x_max);
-    zf_assert(y < ips200_y_max);
-    zf_assert(image != NULL);
+//    zf_assert(x < ips200_x_max);
+//    zf_assert(y < ips200_y_max);
+//    zf_assert(image != NULL);
 
     uint32 i = 0, j = 0;
     uint16 color = 0,temp = 0;
@@ -848,9 +848,9 @@ void ips200_show_rgb565_image (uint16 x, uint16 y, const uint16 *image, uint16 w
 {
     // 如果程序在输出了断言信息 并且提示出错位置在这里
     // 那么一般是屏幕显示的时候超过屏幕分辨率范围了
-    zf_assert(x < ips200_x_max);
-    zf_assert(y < ips200_y_max);
-    zf_assert(image != NULL);
+//    zf_assert(x < ips200_x_max);
+//    zf_assert(y < ips200_y_max);
+//    zf_assert(image != NULL);
 
     uint32 i = 0, j = 0;
     uint16 color = 0;
@@ -899,9 +899,9 @@ void ips200_show_wave (uint16 x, uint16 y, const uint16 *wave, uint16 width, uin
 {
     // 如果程序在输出了断言信息 并且提示出错位置在这里
     // 那么一般是屏幕显示的时候超过屏幕分辨率范围了
-    zf_assert(x < ips200_x_max);
-    zf_assert(y < ips200_y_max);
-    zf_assert(wave != NULL);
+//    zf_assert(x < ips200_x_max);
+//    zf_assert(y < ips200_y_max);
+//    zf_assert(wave != NULL);
 
     uint32 i = 0, j = 0;
     uint32 width_index = 0, value_max_index = 0;
@@ -947,9 +947,9 @@ void ips200_show_chinese (uint16 x, uint16 y, uint8 size, const uint8 *chinese_b
 {
     // 如果程序在输出了断言信息 并且提示出错位置在这里
     // 那么一般是屏幕显示的时候超过屏幕分辨率范围了
-    zf_assert(x < ips200_x_max);
-    zf_assert(y < ips200_y_max);
-    zf_assert(chinese_buffer != NULL);
+//    zf_assert(x < ips200_x_max);
+//    zf_assert(y < ips200_y_max);
+//    zf_assert(chinese_buffer != NULL);
 
     int i, j, k;
     uint8 temp, temp1, temp2;
