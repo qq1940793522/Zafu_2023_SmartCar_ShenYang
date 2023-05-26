@@ -40,6 +40,8 @@
 #include "Motor_Control.h"
 #include "Mahony_icm20602.h"
 #include "PID.h"
+#include "Car_Control.h"
+#include "image.h"
 
 // 将本语句与#pragma section all restore语句之间的全局变量都放在CPU1的RAM中
 
@@ -66,10 +68,9 @@ void core1_main(void)
     debug_init();                   // 初始化默认调试串口
     // 此处编写用户代码 例如外设初始化代码等
 
-<<<<<<< Updated upstream
-
-=======
     ips200_init(IPS200_TYPE);
+    Image_Info_Init();
+
 
     while(1)
         {
@@ -79,7 +80,7 @@ void core1_main(void)
                 break;
             system_delay_ms(500);                                                   // 短延时快速闪灯表示异常
         }
->>>>>>> Stashed changes
+
 
     // 此处编写用户代码 例如外设初始化代码等
     cpu_wait_event_ready();                 // 等待所有核心初始化完毕
@@ -89,15 +90,15 @@ void core1_main(void)
         // zzt
         if(mt9v03x_finish_flag)
         {
-//            Image_Get();            //获取抽样后的图像
-        ips200_displayimage03x((const uint8 *)mt9v03x_image, 188, 120);
-//            ips200_show_gray_image(0, 0, (const uint8 *)mt9v03x_image, MT9V03X_W, MT9V03X_H, 240, 180, 64);     // 显示二值化图像
-        mt9v03x_finish_flag = 0;
+            Image_Get();            //获取抽样后的图像
+            yuzhiget();
+            Image_binaryzation();
+            ips200_displayimage03x((const uint8 *)image_new_bin, 188, 240);
+//          ips200_show_gray_image(0, 0, (const uint8 *)mt9v03x_image, MT9V03X_W, MT9V03X_H, 240, 180, 64);     // 显示二值化图像
+            Mid_Proc();
 
-<<<<<<< Updated upstream
+            mt9v03x_finish_flag = 0;
 
-=======
->>>>>>> Stashed changes
 
         }
         // 此处编写需要循环执行的代码
