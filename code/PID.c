@@ -33,9 +33,9 @@ volatile float roll_velocity_kp = 0.007,        roll_velocity_ki = 0,           
 volatile float roll_gyro_revise = 0,            roll_angle_revise = 0.0,        roll_velocity_revise = 0;
 
 // yaw偏航角参数         使用串级PID
-volatile float yaw_gyro_kp = 100.0,               yaw_gyro_ki = 0,                yaw_gyro_kd = 0;
-volatile float yaw_angle_kp = 0.0,              yaw_angle_ki = 0,               yaw_angle_kd = 0;
-volatile float yaw_velocity_kp = 1.0,           yaw_velocity_ki = 0,            yaw_velocity_kd = 0;
+volatile float yaw_gyro_kp = 5000.0,               yaw_gyro_ki = 0,                yaw_gyro_kd = 0;
+volatile float yaw_angle_kp = 0.2,              yaw_angle_ki = 0,               yaw_angle_kd = 0;
+volatile float yaw_velocity_kp = 0.14,           yaw_velocity_ki = 0,            yaw_velocity_kd = 0;
 volatile float yaw_gyro_revise = 0,             yaw_angle_revise = 0.0,         yaw_velocity_revise = 0;
 
 /*

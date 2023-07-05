@@ -10,7 +10,7 @@
 
 #define alpha       (0.3f)
 #define sampleFreq  (1000.0f)
-#define mahony_Kp   (12.0f)
+#define mahony_Kp   (10.0f)
 #define mahony_Ki   (0.0f)
 
 extern volatile float icm_now_ax, icm_now_ay, icm_now_az;
