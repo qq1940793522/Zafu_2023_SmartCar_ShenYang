@@ -71,7 +71,6 @@ void core1_main(void)
     ips200_init(IPS200_TYPE);
     Image_Info_Init();
 
-
     while(1)
         {
             if(mt9v03x_init())
@@ -87,20 +86,20 @@ void core1_main(void)
     while (TRUE)
     {
         // 此处编写需要循环执行的代码
-        // zzt
+
         if(mt9v03x_finish_flag)
         {
             Image_Get();            //获取抽样后的图像
             yuzhiget();
             Image_binaryzation();
             ips200_displayimage03x((const uint8 *)image_new_bin, 188, 240);
-//          ips200_show_gray_image(0, 0, (const uint8 *)mt9v03x_image, MT9V03X_W, MT9V03X_H, 240, 180, 64);     // 显示二值化图像
+//            ips200_show_gray_image(0, 0, (const uint8 *)mt9v03x_image, MT9V03X_W, MT9V03X_H, 240, 180, 64);     // 显示二值化图像
             Mid_Proc();
-
             mt9v03x_finish_flag = 0;
-
-
         }
+
+        ips200_show_float(10, 16*19, limit(-(Image_Shot.Mid_Out - 94)/20, 4, -4), 2, 2);
+
         // 此处编写需要循环执行的代码
     }
 }

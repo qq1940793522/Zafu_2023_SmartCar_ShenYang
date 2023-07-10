@@ -41,6 +41,7 @@
 #include "Mahony_Icm20602.h"
 #include "PID.h"
 #include "Menu.h"
+#include "image.h"
 
 // 将本语句与#pragma section all restore语句之间的全局变量都放在CPU0的RAM中
 
@@ -110,8 +111,7 @@ IFX_INTERRUPT(cc61_pit_ch0_isr, 0, CCU6_1_CH0_ISR_PRIORITY)
     interrupt_global_enable(0);                     // 开启中断嵌套
     pit_clear_flag(CCU61_CH0);
     //车辆控制
-    car_control(0, 0);
-
+    car_control(300, limit(-(Image_Shot.Mid_Out - 94)/20, 4.5, -4.5));
 }
 #pragma section all restore
 // **************************** 代码区域 ****************************

@@ -29,13 +29,13 @@ volatile float pitch_gyro_revise = 0,           pitch_angle_revise = -1.5,      
 // Roll俯仰角参数        使用串级PID
 volatile float roll_gyro_kp = 10.0,             roll_gyro_ki = 0,               roll_gyro_kd = 1;
 volatile float roll_angle_kp = 160.0,           roll_angle_ki = 0,              roll_angle_kd = 10;
-volatile float roll_velocity_kp = 0.007,        roll_velocity_ki = 0,           roll_velocity_kd = 0;
+volatile float roll_velocity_kp = 0.006,        roll_velocity_ki = 0,           roll_velocity_kd = 0;
 volatile float roll_gyro_revise = 0,            roll_angle_revise = 0.0,        roll_velocity_revise = 0;
 
 // yaw偏航角参数         使用串级PID
-volatile float yaw_gyro_kp = 5000.0,               yaw_gyro_ki = 0,                yaw_gyro_kd = 0;
-volatile float yaw_angle_kp = 0.2,              yaw_angle_ki = 0,               yaw_angle_kd = 0;
-volatile float yaw_velocity_kp = 0.14,           yaw_velocity_ki = 0,            yaw_velocity_kd = 0;
+volatile float yaw_gyro_kp = 5500.0,               yaw_gyro_ki = 0,                yaw_gyro_kd = 0;
+volatile float yaw_angle_kp = 0.3,              yaw_angle_ki = 0,               yaw_angle_kd = 0;
+volatile float yaw_velocity_kp = 0,           yaw_velocity_ki = 0,            yaw_velocity_kd = 0;
 volatile float yaw_gyro_revise = 0,             yaw_angle_revise = 0.0,         yaw_velocity_revise = 0;
 
 /*

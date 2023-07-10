@@ -80,10 +80,11 @@ void car_banlance(void)
     moving_wheel_control(moving_wheel_dir, moving_wheel_pwm);
 }
 
+//rotate:范围—4.5到+4.5
 void car_control(int16 speed, float rotate)
 {
-    // 速度控制     推荐速度speed=250
+    // 速度控制    推荐300
     car_speed = speed;
-    // 旋转控制     范围—1.5到+1.5
+    // 旋转控制     范围—4.5到+4.5
     car_rotate = rotate;
 }
