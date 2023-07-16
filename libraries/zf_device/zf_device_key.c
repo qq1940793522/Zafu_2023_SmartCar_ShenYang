@@ -144,7 +144,7 @@ uint8 key_init (uint32 period)
 
     for(loop_temp = 0; loop_temp < KEY_NUMBER; loop_temp ++)
     {
-        gpio_init(key_index[loop_temp], GPI, GPIO_HIGH, GPI_PULL_UP);
+        gpio_init(key_index[loop_temp], GPI, GPIO_LOW, GPI_PULL_DOWN);
         key_state[loop_temp] = KEY_RELEASE;
     }
     scanner_period = period;
