@@ -85,6 +85,6 @@ void car_control(int16 speed, float rotate)
 {
     // 速度控制    推荐300
     car_speed = speed;
-    // 旋转控制     范围—5.5到+5.5
+    // 旋转控制     范围—4.5到+4.5
     car_rotate = rotate;
 }
